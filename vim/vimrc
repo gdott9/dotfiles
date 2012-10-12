@@ -12,11 +12,11 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'xolox/vim-session'
+Bundle 'tpope/vim-rails'
 
 Bundle 'Gundo'
 Bundle 'The-NERD-tree'
 Bundle 'The-NERD-Commenter'
-Bundle 'rails.vim'
 Bundle 'closetag.vim'
 " }
 
