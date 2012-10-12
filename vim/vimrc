@@ -1,0 +1,203 @@
+set nocompatible
+
+" VUNDLE
+" {
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+Bundle 'xolox/vim-session'
+
+Bundle 'Gundo'
+Bundle 'The-NERD-tree'
+Bundle 'The-NERD-Commenter'
+Bundle 'rails.vim'
+Bundle 'closetag.vim'
+" }
+
+"Enable filetype plugin
+filetype plugin indent on
+syntax enable
+
+set background=dark
+colorscheme desert
+
+set number
+set showmode
+set expandtab
+set shiftwidth=4
+set smarttab
+
+set autoindent
+set smartindent
+set cindent
+set nowrap
+
+set ruler
+set showcmd
+set fileencoding=utf-8
+set fileformats=unix,dos,mac
+set cmdheight=2
+set noerrorbells
+set mouse=a
+set nohls
+set scrolloff=4
+set sidescrolloff=4
+set noincsearch
+set noshowmatch
+
+set listchars=nbsp:·,tab:>-,extends:>,precedes:<
+set list
+
+set splitright
+
+set wildmenu
+set wildmode=longest:full,full
+set wildignore=*~,*.o,*.obj,*.bak,*.exe,*.class,*.jpg,*.png,*.gif,*.mp3
+
+set laststatus=2 " ajoute une barre de status
+set statusline=%f\ %m\ [%{&ff}]\ [%Y]\ [%{&fileencoding}]%=[%04l,\ %04v]\ [len=%04L]
+
+set nocursorline
+set nocursorcolumn
+
+set pastetoggle=<F2>
+
+set history=100
+set undolevels=150
+
+set backup
+
+" Backup dans ~/.vim/backup
+if filewritable(expand("~/.vim/backup")) == 2
+    " comme le répertoire est accessible en écriture,
+    " on va l'utiliser.
+    set backupdir=$HOME/.vim/backup
+else
+    if has("unix") || has("win32unix")
+        " C'est c'est un système compatible UNIX, on
+        " va créer le répertoire et l'utiliser.
+        call system("mkdir $HOME/.vim/backup -p")
+        set backupdir=$HOME/.vim/backup
+    endif
+endif
+
+let mapleader = ","
+
+" FOLDING
+" {
+" Hide/show useless parts of your code
+" view/unfold the hidden block by pressing space inside the folded text
+" :help folding
+set foldenable " Turn on folding
+set foldmarker={,} " Fold C style code (only use this as default if you use a high foldlevel)
+set foldmethod=marker
+set foldcolumn=0 " column to the left to see folds
+set foldlevelstart=100 " évite que tous les folds soient fermés à l'ouverture d'un fichier
+set foldopen-=search " don't open folds when you search into them
+set foldopen-=undo " don't open folds when you undo stuff
+" }
+
+" MAPPING
+" {
+map <F1> :help<CR>
+
+" map toggle yes / no
+noremap gy :call ToggleYesNo()<CR>
+
+map <F3> <ESC>:NERDTreeToggle<CR>
+map <F4> <ESC>:Tlist<CR>
+" Tetris
+map <F5> <ESC>:GundoToggle<CR>
+map <F6> <ESC>:SokobanV<CR>
+map <F7> <ESC>:Matrix<CR>
+map <F8> <Leader>te
+
+map <F11> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+map <F12> ggVGg?
+" }
+
+" PLUGINS
+" {
+" Session
+let g:session_autoload = 'no'
+let g:session_autosave = 'no'
+
+" closetag
+autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
+autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag/plugin/closetag.vim
+
+" TagList : http://vim-taglist.sourceforge.net/
+" Need ctags
+" :help taglist
+let Tlist_Ctags_Cmd="ctags" " chemin vers ctags
+
+" Doxygen
+let g:DoxygenToolkit_authorName="Guillaume DOTT"
+" }
+
+" FILETYPES
+" {
+" Open PDF files
+" need xpdf et cups-pdf
+autocmd BufReadPre *.pdf set ro nowrap
+autocmd BufReadPost *.pdf silent %!pdftotext "%" -nopgbrk -layout -q -eol unix -
+autocmd BufWritePost *.pdf silent !rm -rf ~/Documents/%
+autocmd BufWritePost *.pdf silent !lp -s -d pdffg "%"
+autocmd BufWritePost *.pdf silent !until [ -e ~/Documents/% ]; do sleep 1; done
+autocmd BufWritePost *.pdf silent !mv ~/Documents/% %:p:h
+
+" PHP
+let php_sql_query = 1
+let php_htmlInStrings = 1
+
+au Filetype css vertical resize 50
+
+" chmod +x on the file if it starts with a shebang
+function! ModeChange()
+    if getline(1) =~ "^#!"
+        if getline(1) =~ "/bin/"
+            silent !chmod a+x <afile>
+        endif
+    endif
+endfunction
+
+au BufWritePost * call ModeChange()
+" }
+
+" FUNCTIONS
+" {
+function! ToggleYesNo()
+  let w=expand("<cword>")
+  if     w=="yes"    | let w="no"
+  elseif w=="no"     | let w="yes"
+  elseif w=="on"     | let w="off"
+  elseif w=="off"    | let w="on"
+  elseif w=="True"   | let w="False"
+  elseif w=="False"   | let w="True"
+  elseif w=="true"   | let w="false"
+  elseif w=="false"  | let w="true"
+  elseif w=="manual" | let w="auto"
+  elseif w=="auto"   | let w="manual"
+  elseif w=="public"   | let w="private"
+  elseif w=="private"   | let w="protected"
+  elseif w=="protected"   | let w="public"
+  else               | let w=""
+  endif
+  if w!=""
+    exec "normal! \"_ciw\<C-R>=w\<CR>\<Esc>b"
+  endif
+endfunc
+" }
+
+" MISC
+" {
+" Every spaces/tabs at the end of line will be highlighted.
+au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\s\+$', -1)
+" autocmd BufWrite * silent! %s/[\r \t]\+$//
+" }
