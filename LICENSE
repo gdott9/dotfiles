@@ -1,13 +1,3 @@
-dotfiles
-========
-
-Configuration for zsh, vim, awesome, ...
-
-## LICENSE
-
-Everything in this repository is released under the WTFPL.
-
-```
            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
                    Version 2, December 2004
 
@@ -22,6 +12,4 @@ as the name is changed.
 
  0. You just DO WHAT THE FUCK YOU WANT TO.
 
-```
 
-So, have fun.
