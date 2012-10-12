@@ -1,0 +1,56 @@
+*cursorColor: green
+*underlineColor: green
+
+! colorscheme
+! http://tuxtraining.com/2009/06/27/terminal-color-schemes-for-xdefaults-or-xresources-file
+*foreground: #ffffff
+*background: #111111
+*color0: #1b1b1b
+*color1: #9e1828
+*color2: #20ad20
+*color3: #d4c24f
+*color4: #435e87
+*color5: #cf8243
+*color6: #789ec6
+*color7: #ffffff
+! BOLD
+*color8: #555753
+*color9: #cf6171
+*color10: #35e956
+*color11: #ffff2f
+*color12: #587aa4
+*color13: #f6a24f
+*color14: #46a4ff
+*color15: #ffffff
+
+URxvt.termName: rxvt-unicode
+
+URxvt.pastableTabs: false
+URxvt.buffered: true
+URxvt.saveLines: 8192
+
+!URxvt.iconFile:    /usr/share/pixmaps/rxvt-unicode.png
+
+! xlsfonts
+!URxvt.font: xft:Monospace:pixelsize=12:antialias=true
+!URxvt.boldFont: xft:Monospace:bold:pixelsize=12:antialias=true
+*font: -gohu-gohufont-medium-r-normal--11-*
+*boldFont: -gohu-gohufont-bold-r-normal--11-*
+!*font: -erus-erusfont-medium-r-normal--11-*
+!*boldFont: -erus-erusfont-bold-r-normal--11-*
+
+URxvt.scrollBar: false
+URxvt.scrollstyle: xterm,plain
+URxvt.secondaryScroll: true
+
+URxvt.transparent: true
+URxvt.shading: 5
+URxvt.matcher.button: 1
+URxvt.urgentOnBell: true
+
+URxvt.perl-lib: /home/gdott9/.urxvt/perl:/usr/lib/urxvt/perl
+URxvt.perl-ext: default,matcher,-option-popup,-selection-popup
+URxvt.urlLauncher: /usr/bin/firefox
+
+Xcursor.theme: ATER-yellow
+Xcursor.size: 16
