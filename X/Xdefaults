@@ -29,13 +29,8 @@ URxvt.pastableTabs: false
 URxvt.buffered: true
 URxvt.saveLines: 8192
 
-! xlsfonts
-!URxvt.font: xft:Monospace:pixelsize=12:antialias=true
-!URxvt.boldFont: xft:Monospace:bold:pixelsize=12:antialias=true
 *font: -gohu-gohufont-medium-r-normal--11-*
 *boldFont: -gohu-gohufont-bold-r-normal--11-*
-!*font: -erus-erusfont-medium-r-normal--11-*
-!*boldFont: -erus-erusfont-bold-r-normal--11-*
 
 URxvt.scrollBar: false
 URxvt.scrollstyle: xterm,plain
