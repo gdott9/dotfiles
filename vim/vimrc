@@ -20,7 +20,6 @@ Bundle 'The-NERD-Commenter'
 Bundle 'closetag.vim'
 " }
 
-"Enable filetype plugin
 filetype plugin indent on
 syntax enable
 
@@ -60,7 +59,7 @@ set wildmenu
 set wildmode=longest:full,full
 set wildignore=*~,*.o,*.obj,*.bak,*.exe,*.class,*.jpg,*.png,*.gif,*.mp3
 
-set laststatus=2 " ajoute une barre de status
+set laststatus=2
 set statusline=%f\ %m\ [%{&ff}]\ [%Y]\ [%{&fileencoding}]%=[%04l,\ %04v]\ [len=%04L]
 
 set nocursorline
@@ -73,15 +72,10 @@ set undolevels=150
 
 set backup
 
-" Backup dans ~/.vim/backup
 if filewritable(expand("~/.vim/backup")) == 2
-    " comme le répertoire est accessible en écriture,
-    " on va l'utiliser.
     set backupdir=$HOME/.vim/backup
 else
     if has("unix") || has("win32unix")
-        " C'est c'est un système compatible UNIX, on
-        " va créer le répertoire et l'utiliser.
         call system("mkdir $HOME/.vim/backup -p")
         set backupdir=$HOME/.vim/backup
     endif
@@ -91,34 +85,33 @@ let mapleader = ","
 
 " FOLDING
 " {
-" Hide/show useless parts of your code
-" view/unfold the hidden block by pressing space inside the folded text
-" :help folding
-set foldenable " Turn on folding
-set foldmarker={,} " Fold C style code (only use this as default if you use a high foldlevel)
-set foldmethod=marker
-set foldcolumn=0 " column to the left to see folds
-set foldlevelstart=100 " évite que tous les folds soient fermés à l'ouverture d'un fichier
-set foldopen-=search " don't open folds when you search into them
-set foldopen-=undo " don't open folds when you undo stuff
+set foldenable
+set foldmethod=syntax
+" Number of columns to the left of the window to display folds
+set foldcolumn=0
+" Fold level to close when opening a file
+set foldlevelstart=100
+
+" Don't open folds when searching or undoing into them
+set foldopen-=search
+set foldopen-=undo
 " }
 
 " MAPPING
 " {
 map <F1> :help<CR>
 
-" map toggle yes / no
 noremap gy :call ToggleYesNo()<CR>
 
 map <F3> <ESC>:NERDTreeToggle<CR>
 map <F4> <ESC>:Tlist<CR>
-" Tetris
 map <F5> <ESC>:GundoToggle<CR>
 map <F6> <ESC>:SokobanV<CR>
 map <F7> <ESC>:Matrix<CR>
 map <F8> <Leader>te
 
 map <F11> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+" Rot13
 map <F12> ggVGg?
 " }
 
@@ -135,7 +128,7 @@ autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bu
 " TagList : http://vim-taglist.sourceforge.net/
 " Need ctags
 " :help taglist
-let Tlist_Ctags_Cmd="ctags" " chemin vers ctags
+let Tlist_Ctags_Cmd="ctags"
 
 " Doxygen
 let g:DoxygenToolkit_authorName="Guillaume DOTT"
@@ -144,7 +137,7 @@ let g:DoxygenToolkit_authorName="Guillaume DOTT"
 " FILETYPES
 " {
 " Open PDF files
-" need xpdf et cups-pdf
+" need xpdf and cups-pdf
 autocmd BufReadPre *.pdf set ro nowrap
 autocmd BufReadPost *.pdf silent %!pdftotext "%" -nopgbrk -layout -q -eol unix -
 autocmd BufWritePost *.pdf silent !rm -rf ~/Documents/%
