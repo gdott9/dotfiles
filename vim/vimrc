@@ -99,16 +99,14 @@ set foldopen-=undo
 
 " MAPPING
 " {
-map <F1> :help<CR>
+map <F1> <ESC>
+imap <F1> <ESC>
 
 noremap gy :call ToggleYesNo()<CR>
 
 map <F3> <ESC>:NERDTreeToggle<CR>
 map <F4> <ESC>:Tlist<CR>
 map <F5> <ESC>:GundoToggle<CR>
-map <F6> <ESC>:SokobanV<CR>
-map <F7> <ESC>:Matrix<CR>
-map <F8> <Leader>te
 
 map <F11> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " Rot13
