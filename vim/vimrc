@@ -73,12 +73,12 @@ set undolevels=150
 
 set backup
 
-if filewritable(expand("~/.vim/backup")) == 2
-    set backupdir=$HOME/.vim/backup
+if filewritable(expand("~/.vim/tmp/backup")) == 2
+    set backupdir=$HOME/.vim/tmp/backup
 else
     if has("unix") || has("win32unix")
-        call system("mkdir $HOME/.vim/backup -p")
-        set backupdir=$HOME/.vim/backup
+        call system("mkdir $HOME/.vim/tmp/backup -p")
+        set backupdir=$HOME/.vim/tmp/backup
     endif
 endif
 
