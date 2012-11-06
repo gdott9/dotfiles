@@ -13,6 +13,7 @@ Bundle 'gmarik/vundle'
 
 Bundle 'xolox/vim-session'
 Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-markdown'
 
 Bundle 'Gundo'
 Bundle 'The-NERD-tree'
