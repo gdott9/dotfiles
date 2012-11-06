@@ -71,6 +71,17 @@ set pastetoggle=<F2>
 set history=100
 set undolevels=150
 
+set undofile
+
+if filewritable(expand("~/.vim/tmp/undo")) == 2
+    set undodir=$HOME/.vim/tmp/undo
+else
+    if has("unix") || has("win32unix")
+        call system("mkdir $HOME/.vim/tmp/undo -p")
+        set undodir=$HOME/.vim/tmp/undo
+    endif
+endif
+
 set backup
 
 if filewritable(expand("~/.vim/tmp/backup")) == 2
