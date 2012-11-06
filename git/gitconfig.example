@@ -1,0 +1,5 @@
+[user]
+	email = guillaume+github@dott.fr
+	name = Guillaume DOTT
+[include]
+	path = ~/.gitconfig.include
