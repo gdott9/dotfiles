@@ -3,3 +3,4 @@
 	name = Guillaume DOTT
 [include]
 	path = ~/.gitconfig.include
+# vim: set filetype=gitconfig:
