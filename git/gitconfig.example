@@ -1,6 +1,8 @@
 [user]
 	email = guillaume+github@dott.fr
 	name = Guillaume DOTT
+[push]
+	default = simple
 [include]
 	path = ~/.gitconfig.include
 # vim: set filetype=gitconfig:
