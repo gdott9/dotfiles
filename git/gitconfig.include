@@ -5,4 +5,8 @@
 	st = status
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	ll = log --stat --abbrev-commit
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
 # vim: set filetype=gitconfig:
