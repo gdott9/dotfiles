@@ -145,6 +145,8 @@ alias ls='ls --color=auto'
 alias windows='sudo grub-reboot 2;sudo reboot'
 alias youtube='quvi --exec "mplayer %u"'
 alias poweroff='sudo poweroff'
+alias xephyr-dualscreen='Xephyr -ac -br -noreset -screen 800x600 -screen 800x600 :1& DISPLAY=:1; setxkbmap fr bepo'
+alias xephyr-onescreen='Xephyr -ac -br -noreset -screen 800x600 :1& DISPLAY=:1; setxkbmap fr bepo'
 
 alias -s pdf=zathura
 alias -s ps=gv
