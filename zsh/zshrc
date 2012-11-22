@@ -147,6 +147,7 @@ alias youtube='quvi --exec "mplayer %u"'
 alias poweroff='sudo poweroff'
 alias xephyr-dualscreen='Xephyr -ac -br -noreset -screen 800x600 -screen 800x600 :1& DISPLAY=:1; setxkbmap fr bepo'
 alias xephyr-onescreen='Xephyr -ac -br -noreset -screen 800x600 :1& DISPLAY=:1; setxkbmap fr bepo'
+alias reload="pkill -u `id -u` -USR1 zsh"
 
 alias -s pdf=zathura
 alias -s ps=gv
@@ -181,3 +182,5 @@ function send_infocmp() {
     REMOTE=$1
     infocmp rxvt-unicode-256color | ssh $REMOTE "mkdir -p .terminfo && cat >/tmp/ti && tic /tmp/ti"
 }
+
+trap "source ~/.zshrc && rehash" USR1
