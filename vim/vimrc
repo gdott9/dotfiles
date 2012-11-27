@@ -138,6 +138,16 @@ map <F12> ggVGg?
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 
+if filewritable(expand("~/.vim/tmp/sessions")) == 2
+    let g:session_directory=$HOME."/.vim/tmp/sessions"
+else
+    if has("unix") || has("win32unix")
+        call system("mkdir $HOME/.vim/tmp/sessions -p")
+        let g:session_directory=$HOME."/.vim/tmp/sessions"
+    endif
+endif
+
+
 " closetag
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
 autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag.vim/plugin/closetag.vim
