@@ -2,30 +2,32 @@ set nocompatible
 
 " VUNDLE
 " {
-filetype off                   " required!
+if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
+    filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+    " let Vundle manage Vundle
+    " required!
+    Bundle 'gmarik/vundle'
 
-Bundle 'xolox/vim-session'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-markdown'
+    Bundle 'xolox/vim-session'
+    Bundle 'tpope/vim-rails'
+    Bundle 'tpope/vim-markdown'
 
-Bundle "garbas/vim-snipmate"
-" snipMate dependencies
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "honza/snipmate-snippets"
+    Bundle "garbas/vim-snipmate"
+    " snipMate dependencies
+    Bundle "MarcWeber/vim-addon-mw-utils"
+    Bundle "tomtom/tlib_vim"
+    Bundle "honza/snipmate-snippets"
 
-Bundle 'Gundo'
-Bundle 'The-NERD-tree'
-Bundle 'The-NERD-Commenter'
-Bundle 'closetag.vim'
-Bundle 'VisIncr'
+    Bundle 'Gundo'
+    Bundle 'The-NERD-tree'
+    Bundle 'The-NERD-Commenter'
+    Bundle 'closetag.vim'
+    Bundle 'VisIncr'
+endif
 " }
 
 filetype plugin indent on
