@@ -82,25 +82,17 @@ set undolevels=150
 
 set undofile
 
-if filewritable(expand("~/.vim/tmp/undo")) == 2
-    set undodir=$HOME/.vim/tmp/undo
-else
-    if has("unix") || has("win32unix")
-        call system("mkdir $HOME/.vim/tmp/undo -p")
-        set undodir=$HOME/.vim/tmp/undo
-    endif
+if !filewritable(expand("~/.vim/tmp/undo"))
+    call mkdir(expand("~/.vim/tmp/undo"), "p")
 endif
+set undodir=~/.vim/tmp/undo
 
 set backup
 
-if filewritable(expand("~/.vim/tmp/backup")) == 2
-    set backupdir=$HOME/.vim/tmp/backup
-else
-    if has("unix") || has("win32unix")
-        call system("mkdir $HOME/.vim/tmp/backup -p")
-        set backupdir=$HOME/.vim/tmp/backup
-    endif
+if !filewritable(expand("~/.vim/tmp/backup"))
+    call mkdir(expand("~/.vim/tmp/backup"), "p")
 endif
+set backupdir=~/.vim/tmp/backup
 
 let mapleader = ","
 
@@ -140,13 +132,9 @@ map <F12> ggVGg?
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 
-if filewritable(expand("~/.vim/tmp/sessions")) == 2
-    let g:session_directory=$HOME."/.vim/tmp/sessions"
-else
-    if has("unix") || has("win32unix")
-        call system("mkdir $HOME/.vim/tmp/sessions -p")
-        let g:session_directory=$HOME."/.vim/tmp/sessions"
-    endif
+let g:session_directory=$HOME."/.vim/tmp/sessions"
+if !filewritable(expand(g:session_directory))
+    call mkdir(expand(g:session_directory), "p")
 endif
 
 
