@@ -195,25 +195,25 @@ au BufWritePost * call ModeChange()
 " FUNCTIONS
 " {
 function! ToggleYesNo()
-  let w=expand("<cword>")
-  if     w=="yes"    | let w="no"
-  elseif w=="no"     | let w="yes"
-  elseif w=="on"     | let w="off"
-  elseif w=="off"    | let w="on"
-  elseif w=="True"   | let w="False"
-  elseif w=="False"   | let w="True"
-  elseif w=="true"   | let w="false"
-  elseif w=="false"  | let w="true"
-  elseif w=="manual" | let w="auto"
-  elseif w=="auto"   | let w="manual"
-  elseif w=="public"   | let w="private"
-  elseif w=="private"   | let w="protected"
-  elseif w=="protected"   | let w="public"
-  else               | let w=""
-  endif
-  if w!=""
-    exec "normal! \"_ciw\<C-R>=w\<CR>\<Esc>b"
-  endif
+    let w=expand("<cword>")
+    if     w=="yes"    | let w="no"
+    elseif w=="no"     | let w="yes"
+    elseif w=="on"     | let w="off"
+    elseif w=="off"    | let w="on"
+    elseif w=="True"   | let w="False"
+    elseif w=="False"   | let w="True"
+    elseif w=="true"   | let w="false"
+    elseif w=="false"  | let w="true"
+    elseif w=="manual" | let w="auto"
+    elseif w=="auto"   | let w="manual"
+    elseif w=="public"   | let w="private"
+    elseif w=="private"   | let w="protected"
+    elseif w=="protected"   | let w="public"
+    else               | let w=""
+    endif
+    if w!=""
+        exec "normal! \"_ciw\<C-R>=w\<CR>\<Esc>b"
+    endif
 endfunc
 " }
 
