@@ -43,8 +43,6 @@ set shiftwidth=4
 set smarttab
 
 set autoindent
-set smartindent
-set cindent
 set nowrap
 
 set ruler
