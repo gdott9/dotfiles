@@ -36,7 +36,7 @@ syntax enable
 set background=dark
 colorscheme desert
 
-set number
+set relativenumber
 set showmode
 set expandtab
 set shiftwidth=4
@@ -122,6 +122,8 @@ map <F5> <ESC>:GundoToggle<CR>
 map <F11> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " Rot13
 map <F12> ggVGg?
+
+nnoremap <silent> <leader>r :call NumberToggle()<CR>
 " }
 
 " PLUGINS
@@ -201,6 +203,15 @@ function! ToggleYesNo()
         exec "normal! \"_ciw\<C-R>=w\<CR>\<Esc>b"
     endif
 endfunc
+
+" NumberToggle toggles between relative and absolute line numbers
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
 " }
 
 " MISC
@@ -208,4 +219,9 @@ endfunc
 " Every spaces/tabs at the end of line will be highlighted.
 au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\s\+$', -1)
 " autocmd BufWrite * silent! %s/[\r \t]\+$//
+
+autocmd WinLeave * set number
+autocmd WinEnter * set relativenumber
+autocmd InsertEnter * set number
+autocmd InsertLeave * set relativenumber
 " }
