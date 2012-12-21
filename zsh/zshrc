@@ -105,7 +105,7 @@ fi
 export PS1='%m%{$fg[$COLOR]%}:%{$reset_color%}%~${vcs_info_msg_0_}%{$fg[$COLOR]%}%#%{$reset_color%} '
 export PS2="%_> "
 
-export PATH="${PATH}:/home/guillaume/.gem/ruby/1.9.1/bin"
+export PATH="${PATH}:${HOME}/.gem/ruby/1.9.1/bin"
 
 export LESS_TERMCAP_mb=$'\E[01;31m' # begin blinking
 export LESS_TERMCAP_md=$'\E[01;31m' # begin bold
@@ -145,8 +145,8 @@ alias ls='ls --color=auto'
 alias windows='sudo grub-reboot 2;sudo reboot'
 alias youtube='quvi --exec "mplayer %u"'
 alias poweroff='sudo poweroff'
-alias xephyr-dualscreen='Xephyr -ac -br -noreset -screen 800x600 -screen 800x600 :1& DISPLAY=:1; setxkbmap fr bepo'
-alias xephyr-onescreen='Xephyr -ac -br -noreset -screen 800x600 :1& DISPLAY=:1; setxkbmap fr bepo'
+alias xephyr-dualscreen='Xephyr -ac -br -noreset -screen 800x600 -screen 800x600 :1& sleep 3; DISPLAY=:1; setxkbmap fr bepo'
+alias xephyr-onescreen='Xephyr -ac -br -noreset -screen 800x600 :1& sleep 3; DISPLAY=:1; setxkbmap fr bepo'
 alias reload="pkill -u `id -u` -USR1 zsh"
 
 alias -s pdf=zathura
