@@ -43,6 +43,7 @@ URxvt.urgentOnBell: true
 
 URxvt.perl-ext: default,matcher,-option-popup,-selection-popup
 URxvt.urlLauncher: /usr/bin/firefox
+URxvt.url-launcher: /usr/bin/firefox
 
 Xcursor.theme: ATER-yellow
 Xcursor.size: 16
