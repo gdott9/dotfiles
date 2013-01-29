@@ -14,6 +14,7 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
 
     Bundle 'xolox/vim-session'
     Bundle 'tpope/vim-rails'
+    Bundle 'vim-ruby/vim-ruby'
     Bundle 'tpope/vim-markdown'
 
     Bundle "garbas/vim-snipmate"
@@ -21,6 +22,9 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
     Bundle "MarcWeber/vim-addon-mw-utils"
     Bundle "tomtom/tlib_vim"
     Bundle "honza/snipmate-snippets"
+
+    Bundle 'goldfeld/vim-seek'
+    Bundle 'Lokaltog/vim-easymotion'
 
     Bundle 'Gundo'
     Bundle 'The-NERD-tree'
@@ -39,7 +43,7 @@ colorscheme desert
 set relativenumber
 set showmode
 set expandtab
-set shiftwidth=4
+set shiftwidth=2
 set smarttab
 
 set autoindent
