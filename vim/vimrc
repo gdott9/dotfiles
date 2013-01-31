@@ -13,8 +13,9 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
     Bundle 'gmarik/vundle'
 
     Bundle 'xolox/vim-session'
-    Bundle 'tpope/vim-rails'
     Bundle 'vim-ruby/vim-ruby'
+    Bundle 'tpope/vim-rails'
+    Bundle 'tpope/vim-haml'
     Bundle 'tpope/vim-markdown'
 
     Bundle "garbas/vim-snipmate"
@@ -30,6 +31,7 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
     Bundle 'The-NERD-tree'
     Bundle 'The-NERD-Commenter'
     Bundle 'closetag.vim'
+    Bundle 'taglist.vim'
     Bundle 'VisIncr'
 endif
 " }
