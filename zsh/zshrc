@@ -8,6 +8,9 @@ bashcompinit
 
 autoload -Uz vcs_info
 
+autoload -z edit-command-line
+zle -N edit-command-line
+
 #-----------------#
 # Auto-completion #
 #-----------------#
@@ -69,6 +72,7 @@ setopt prompt_subst
 # VIM mode #
 #----------#
 bindkey -v
+bindkey -M vicmd v edit-command-line
 
 # Affiche le mode (normal ou insert) dans le prompt de droite
 function zle-line-init zle-keymap-select
