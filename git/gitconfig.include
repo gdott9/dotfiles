@@ -2,13 +2,14 @@
 	ui = auto
 	interactive = auto
 [alias]
-	st = status
+	st = status -sb
 	ci = commit
 	co = checkout
 	pr = pull --rebase
-	diffc = diff --cached
+	dc = diff --cached
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	ll = log --stat --abbrev-commit
+	amend = commit --amend -C HEAD
 [diff]
 	tool = vimdiff
 [merge]
