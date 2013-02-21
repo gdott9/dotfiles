@@ -103,7 +103,11 @@ then
     then COLOR="red"
     else COLOR="blue"
     fi
-else COLOR="green"
+else
+  if [ -n "$SSH_CLIENT" ]
+  then COLOR="blue"
+  else COLOR="green"
+  fi
 fi
 
 export PS1='%m%{$fg[$COLOR]%}:%{$reset_color%}%~${vcs_info_msg_0_}%{$fg[$COLOR]%}%#%{$reset_color%} '
