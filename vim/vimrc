@@ -28,6 +28,9 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'ton/vim-bufsurf'
 
+    Bundle 'airblade/vim-gitgutter'
+    Bundle 'tpope/vim-fugitive'
+
     Bundle 'Gundo'
     Bundle 'The-NERD-tree'
     Bundle 'The-NERD-Commenter'
@@ -231,6 +234,8 @@ endfunc
 
 " MISC
 " {
+" Required for vim-gitgutter signcolumn
+highlight clear SignColumn
 " Every spaces/tabs at the end of line will be highlighted.
 au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\s\+$', -1)
 " autocmd BufWrite * silent! %s/[\r \t]\+$//
