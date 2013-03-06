@@ -81,7 +81,7 @@ set wildmode=longest:full,full
 set wildignore=*~,*.o,*.obj,*.bak,*.exe,*.class,*.jpg,*.png,*.gif,*.mp3
 
 set laststatus=2
-set statusline=%f\ %m\ [%{&ff}]\ [%Y]\ [%{&fileencoding}]%=[%04l,\ %04v]\ [len=%04L]
+set statusline=%f\ %m\ %Y\|%{&ff}\|%{&fileencoding}%=%vx%l\ [%03L]
 
 set nocursorline
 set nocursorcolumn
