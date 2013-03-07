@@ -27,6 +27,7 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
     Bundle 'goldfeld/vim-seek'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'ton/vim-bufsurf'
+    Bundle 'jeffkreeftmeijer/vim-numbertoggle'
 
     Bundle 'airblade/vim-gitgutter'
     Bundle 'tpope/vim-fugitive'
@@ -136,8 +137,6 @@ map <F11> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " Rot13
 map <F12> ggVGg?
 
-nnoremap <silent> <leader>r :call NumberToggle()<CR>
-
 nnoremap <silent> ,bp :bprevious<CR>
 nnoremap <silent> ,bf :bnext<CR>
 nnoremap <silent> ,Bp :BufSurfBack<CR>
@@ -146,6 +145,8 @@ nnoremap <silent> ,Bf :BufSurfForward<CR>
 
 " PLUGINS
 " {
+" numbertoggle
+let g:NumberToggleTrigger = "<leader>r"
 " Session
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
@@ -221,15 +222,6 @@ function! ToggleYesNo()
         exec "normal! \"_ciw\<C-R>=w\<CR>\<Esc>b"
     endif
 endfunc
-
-" NumberToggle toggles between relative and absolute line numbers
-function! NumberToggle()
-    if(&relativenumber == 1)
-        set number
-    else
-        set relativenumber
-    endif
-endfunc
 " }
 
 " MISC
@@ -240,8 +232,6 @@ highlight clear SignColumn
 au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\s\+$', -1)
 " autocmd BufWrite * silent! %s/[\r \t]\+$//
 
-autocmd WinLeave * set number
-autocmd WinEnter * set relativenumber
-autocmd InsertEnter * set number
-autocmd InsertLeave * set relativenumber
+autocmd WinLeave * :call FocusLost()
+autocmd WinEnter * :call FocusGained()
 " }
