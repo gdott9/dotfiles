@@ -141,6 +141,9 @@ nnoremap <silent> ,bp :bprevious<CR>
 nnoremap <silent> ,bf :bnext<CR>
 nnoremap <silent> ,Bp :BufSurfBack<CR>
 nnoremap <silent> ,Bf :BufSurfForward<CR>
+
+" delete into the black hole register
+nnoremap <leader>d "_d
 " }
 
 " PLUGINS
