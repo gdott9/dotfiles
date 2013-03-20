@@ -190,6 +190,11 @@ let php_htmlInStrings = 1
 
 au Filetype css vertical resize 50
 
+" Don't screw up folds when inserting text that might affect them, until
+" leaving insert mode. Foldmethod is local to the window.
+autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
+autocmd InsertLeave * let &l:foldmethod=w:last_fdm
+
 " chmod +x on the file if it starts with a shebang
 function! ModeChange()
     if getline(1) =~ "^#!"
