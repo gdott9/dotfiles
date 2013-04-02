@@ -28,6 +28,7 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'ton/vim-bufsurf'
     Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+    Bundle 'Yggdroot/indentLine'
 
     Bundle 'airblade/vim-gitgutter'
     Bundle 'tpope/vim-fugitive'
