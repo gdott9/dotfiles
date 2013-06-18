@@ -15,4 +15,6 @@
 	tool = vimdiff
 [merge]
 	tool = meld
+[credential]
+	helper = cache
 # vim: set filetype=gitconfig:
