@@ -60,6 +60,7 @@ set autoindent
 set nowrap
 
 set hidden
+set switchbuf=useopen,usetab
 set ruler
 set showcmd
 set fileencoding=utf-8
@@ -77,6 +78,7 @@ set listchars=nbsp:·,tab:>-,extends:>,precedes:<
 set list
 
 set splitright
+set splitbelow
 
 set wildmenu
 set wildmode=longest:full,full
