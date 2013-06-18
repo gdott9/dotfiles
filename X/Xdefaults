@@ -37,9 +37,11 @@ URxvt.scrollstyle: xterm,plain
 URxvt.secondaryScroll: true
 
 URxvt.transparent: true
-URxvt.shading: 5
+URxvt.shading: 6
 URxvt.matcher.button: 1
 URxvt.urgentOnBell: true
+
+URxvt.modifier: mod1
 
 URxvt.perl-ext: default,matcher,-option-popup,-selection-popup
 URxvt.urlLauncher: /usr/bin/firefox
