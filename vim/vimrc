@@ -73,6 +73,7 @@ set scrolloff=4
 set sidescrolloff=4
 set noincsearch
 set noshowmatch
+set colorcolumn=80
 
 set listchars=nbsp:·,tab:>-,extends:>,precedes:<
 set list
@@ -94,6 +95,8 @@ set pastetoggle=<F2>
 
 set history=100
 set undolevels=150
+
+set ttimeoutlen=100
 
 set undofile
 
