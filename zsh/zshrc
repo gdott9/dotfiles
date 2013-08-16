@@ -47,11 +47,13 @@ zstyle ':vcs_info:*' enable git svn hg
 zstyle ':vcs_info:git*' formats " (%s.%b) "
 zstyle ':vcs_info:hg*' formats " (%s.%b) "
 
-#--------------------#
-# Options activation #
-#--------------------#
+#----------------------------------------------#
+# Options activation                           #
+# http://www.cs.elte.hu/zsh-manual/zsh_16.html #
+#----------------------------------------------#
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
+setopt append_history
 setopt extended_history
 
 setopt complete_in_word
@@ -67,6 +69,9 @@ setopt autocd
 setopt nobeep
 
 setopt prompt_subst
+
+setopt nullglob
+setopt autopushd
 
 #----------#
 # VIM mode #
