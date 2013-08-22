@@ -1,11 +1,6 @@
 #!/bin/zsh
 
 autoload -U colors && colors
-autoload -Uz compinit && compinit
-
-autoload -U bashcompinit
-bashcompinit
-
 autoload -Uz vcs_info
 
 autoload -z edit-command-line
@@ -14,6 +9,14 @@ zle -N edit-command-line
 #-----------------#
 # Auto-completion #
 #-----------------#
+# https://github.com/zsh-users/zsh-completions
+[ -d "$HOME/.zsh/zsh-completions/src" ] && fpath=($HOME/.zsh/zsh-completions/src $fpath)
+
+autoload -Uz compinit && compinit
+
+autoload -U bashcompinit
+bashcompinit
+
 zstyle :compinstall filename '/home/gdott9/.zshrc'
 
 # Display a message when no match
@@ -162,6 +165,7 @@ alias poweroff='sudo poweroff'
 alias xephyr-dualscreen='Xephyr -ac -br -noreset -screen 800x600 -screen 800x600 :1& sleep 3; DISPLAY=:1; setxkbmap fr bepo'
 alias xephyr-onescreen='Xephyr -ac -br -noreset -screen 800x600 :1& sleep 3; DISPLAY=:1; setxkbmap fr bepo'
 alias reload="pkill -u `id -u` --signal USR1 zsh"
+alias be='bundle exec'
 
 alias -s pdf=zathura
 alias -s ps=gv
