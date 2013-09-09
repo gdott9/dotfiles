@@ -18,20 +18,23 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
     Bundle 'tpope/vim-haml'
     Bundle 'tpope/vim-markdown'
 
-    Bundle "garbas/vim-snipmate"
     " snipMate dependencies
     Bundle "MarcWeber/vim-addon-mw-utils"
     Bundle "tomtom/tlib_vim"
-    Bundle "honza/snipmate-snippets"
+    Bundle "honza/vim-snippets"
+
+    "Bundle "garbas/vim-snipmate"
 
     Bundle 'goldfeld/vim-seek'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'ton/vim-bufsurf'
     Bundle 'jeffkreeftmeijer/vim-numbertoggle'
     Bundle 'Yggdroot/indentLine'
+    Bundle 'AndrewRadev/switch.vim'
 
     Bundle 'airblade/vim-gitgutter'
     Bundle 'tpope/vim-fugitive'
+    Bundle 'scrooloose/syntastic'
 
     Bundle 'Gundo'
     Bundle 'The-NERD-tree'
@@ -133,15 +136,15 @@ set foldopen-=undo
 map <F1> <ESC>
 imap <F1> <ESC>
 
-noremap gy :call ToggleYesNo()<CR>
-
 map <F3> <ESC>:NERDTreeToggle<CR>
 map <F4> <ESC>:Tlist<CR>
 map <F5> <ESC>:GundoToggle<CR>
 
+nnoremap <silent> gy :Switch<CR>
+
 map <F11> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 " Rot13
-map <F12> ggVGg?
+map <F12> ggg?G
 
 nnoremap <silent> ,bp :bprevious<CR>
 nnoremap <silent> ,bf :bnext<CR>
@@ -218,27 +221,6 @@ au BufWritePost * call ModeChange()
 
 " FUNCTIONS
 " {
-function! ToggleYesNo()
-    let w=expand("<cword>")
-    if     w=="yes"    | let w="no"
-    elseif w=="no"     | let w="yes"
-    elseif w=="on"     | let w="off"
-    elseif w=="off"    | let w="on"
-    elseif w=="True"   | let w="False"
-    elseif w=="False"   | let w="True"
-    elseif w=="true"   | let w="false"
-    elseif w=="false"  | let w="true"
-    elseif w=="manual" | let w="auto"
-    elseif w=="auto"   | let w="manual"
-    elseif w=="public"   | let w="private"
-    elseif w=="private"   | let w="protected"
-    elseif w=="protected"   | let w="public"
-    else               | let w=""
-    endif
-    if w!=""
-        exec "normal! \"_ciw\<C-R>=w\<CR>\<Esc>b"
-    endif
-endfunc
 " }
 
 " MISC
