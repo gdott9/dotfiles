@@ -53,6 +53,7 @@ set t_Co=256
 set background=dark
 colorscheme desert
 
+set number
 set relativenumber
 set showmode
 set expandtab
@@ -72,17 +73,21 @@ set cmdheight=2
 set noerrorbells
 set mouse=a
 set nohls
-set scrolloff=4
-set sidescrolloff=4
+set scrolloff=5
+set sidescroll=20
+set sidescrolloff=20
 set noincsearch
 set noshowmatch
 set colorcolumn=80
 
-set listchars=nbsp:·,tab:>-,extends:>,precedes:<
+set winwidth=100
+
+set listchars=nbsp:·,tab:▸\ ,extends:>,precedes:<
 set list
 
-set splitright
-set splitbelow
+set formatoptions+=j
+
+set splitright splitbelow
 
 set wildmenu
 set wildmode=longest:full,full
