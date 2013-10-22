@@ -28,7 +28,6 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
     Bundle 'goldfeld/vim-seek'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'ton/vim-bufsurf'
-    Bundle 'jeffkreeftmeijer/vim-numbertoggle'
     Bundle 'Yggdroot/indentLine'
     Bundle 'AndrewRadev/switch.vim'
 
@@ -236,6 +235,4 @@ highlight clear SignColumn
 au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\s\+$', -1)
 " autocmd BufWrite * silent! %s/[\r \t]\+$//
 
-autocmd WinLeave * :call FocusLost()
-autocmd WinEnter * :call FocusGained()
 " }
