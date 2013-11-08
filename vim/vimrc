@@ -61,6 +61,7 @@ set smarttab
 
 set autoindent
 set nowrap
+set gdefault
 
 set hidden
 set switchbuf=useopen,usetab
