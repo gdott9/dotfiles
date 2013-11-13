@@ -188,6 +188,14 @@ let Tlist_Ctags_Cmd="ctags"
 
 " Doxygen
 let g:DoxygenToolkit_authorName="Guillaume DOTT"
+
+autocmd FileType ruby let b:switch_custom_definitions =
+    \ [
+    \   {
+    \     'lambda { |\([^|]\+\)|': '->(\1) {',
+    \     '->(\([^)]\+\)) {': 'lambda { |\1|',
+    \   },
+    \ ]
 " }
 
 " FILETYPES
