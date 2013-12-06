@@ -12,6 +12,7 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
     " required!
     Bundle 'gmarik/vundle'
 
+    Bundle 'xolox/vim-misc'
     Bundle 'xolox/vim-session'
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'tpope/vim-rails'
