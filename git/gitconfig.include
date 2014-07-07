@@ -8,9 +8,13 @@
 	pr = pull --rebase
 	dc = diff --cached
 	r = remote
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lg = log --graph --pretty=tformat:'%C(red)%h%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%aN>%Creset' --abbrev-commit --date=relative
 	ll = log --stat --abbrev-commit
 	amend = commit --amend -C HEAD
+
+	s = stash
+	sl = stash list
+	ss = stash show
 [diff]
 	tool = vimdiff
 [merge]
@@ -19,4 +23,8 @@
 	keepBackup = false
 [credential]
 	helper = cache
+[help]
+	autocorrect = -1
+[rerere]
+	enabled = true
 # vim: set filetype=gitconfig:
