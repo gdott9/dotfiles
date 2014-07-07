@@ -139,7 +139,7 @@ if [ -d "${RBENV_ROOT}" ]; then
   eval "$(rbenv init -)"
 fi
 
-export RUBY_HEAP_MIN_SLOTS=800000
+export RUBY_GC_HEAP_INIT_SLOTS=800000
 export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
@@ -165,7 +165,9 @@ alias poweroff='sudo poweroff'
 alias xephyr-dualscreen='Xephyr -ac -br -noreset -screen 800x600 -screen 800x600 :1& sleep 3; DISPLAY=:1; setxkbmap fr bepo'
 alias xephyr-onescreen='Xephyr -ac -br -noreset -screen 800x600 :1& sleep 3; DISPLAY=:1; setxkbmap fr bepo'
 alias reload="pkill -u `id -u` --signal USR1 zsh"
+alias loadkeychain='eval $(/usr/bin/keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa)'
 alias be='bundle exec'
+alias git-count="gawk '{ add += \$1 ; subs += \$2 ; loc += \$1 - \$2 } END { printf \"added lines: %s, removed lines : %s, total lines : %s\n\", add, subs, loc }\' -"
 
 alias -s pdf=zathura
 alias -s ps=gv
@@ -202,3 +204,5 @@ function send_infocmp() {
 }
 
 trap "source ~/.zshrc && rehash" USR1
+
+loadkeychain
