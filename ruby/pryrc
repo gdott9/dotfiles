@@ -1,6 +1,12 @@
 # vim FTW
 Pry.config.editor = 'vim'
 
+# Repeat last command on enter
+# https://github.com/pry/pry/issues/607
+Pry::Commands.command(/^$/, "repeat last command") do
+  _pry_.input = StringIO.new(Pry.history.to_a.last)
+end
+
 # Toys methods
 # See https://gist.github.com/807492
 class Array
@@ -15,16 +21,14 @@ class Hash
   end
 end
 
-if defined?(Rails) && Rails.env
-  require 'logger'
+# Ask for Apartment tenant
+if defined?(Rails::Console) && defined?(Apartment)
+  available_tenants = Apartment.tenant_names.sort
+  default_tenant = available_tenants.first
 
-  if defined?(ActiveRecord)
-    ActiveRecord::Base.logger = Logger.new(STDOUT)
-    ActiveRecord::Base.clear_active_connections!
-  end
+  puts "Available tenants: #{available_tenants.join(',')}"
+  print "Select tenant (#{default_tenant}): "
+  tenant = gets.strip
 
-  if defined?(DataMapper)
-    DataMapper::Logger.new($stdout, :debug)
-  end
-
+  Apartment::Tenant.switch(available_tenants.include?(tenant) ? tenant : default_tenant)
 end
