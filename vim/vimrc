@@ -19,6 +19,8 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
     Plugin 'tpope/vim-haml'
     Plugin 'tpope/vim-markdown'
 
+    Plugin 'slim-template/vim-slim'
+
     Plugin 'Sirver/ultisnips'
     Plugin 'honza/vim-snippets'
 
