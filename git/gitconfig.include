@@ -29,4 +29,6 @@
 	autocorrect = -1
 [rerere]
 	enabled = true
+[rebase]
+	autosquash = true
 # vim: set filetype=gitconfig:
