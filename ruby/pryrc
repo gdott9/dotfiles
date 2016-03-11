@@ -1,34 +1,4 @@
 # vim FTW
 Pry.config.editor = 'vim'
 
-# Repeat last command on enter
-# https://github.com/pry/pry/issues/607
-Pry::Commands.command(/^$/, "repeat last command") do
-  _pry_.input = StringIO.new(Pry.history.to_a.last)
-end
-
-# Toys methods
-# See https://gist.github.com/807492
-class Array
-  def self.toy(n=10, &block)
-    block_given? ? Array.new(n,&block) : Array.new(n) {|i| i+1}
-  end
-end
-
-class Hash
-  def self.toy(n=10)
-    Hash[Array.toy(n).zip(Array.toy(n){|c| (96+(c+1)).chr})]
-  end
-end
-
-# Ask for Apartment tenant
-if defined?(Rails::Console) && defined?(Apartment)
-  available_tenants = Apartment.tenant_names.sort
-  default_tenant = available_tenants.first
-
-  puts "Available tenants: #{available_tenants.join(',')}"
-  print "Select tenant (#{default_tenant}): "
-  tenant = gets.strip
-
-  Apartment::Tenant.switch(available_tenants.include?(tenant) ? tenant : default_tenant)
-end
+load "#{ENV['HOME']}/.rubyrc" if File.exist?("#{ENV['HOME']}/.rubyrc")
