@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+xset m 3 1
+xset +fp /usr/share/fonts/X11/gohufont-2.0
+xset fp rehash
+
+${HOME}/.screenlayout/dual-screen.sh
+
+setxkbmap -model pc104 -layout fr,us -variant bepo, -option grp:shifts_toggle
+xmodmap ${HOME}/.Xmodmap
+
+urxvtd -q -o -f
+
+redshift -l 48.629221:7.76559 -t 5500K:4000K&
+
+Esetroot ${HOME}/pictures/nasa-iotd/wallpaper.jpg
+
+exec awesome
