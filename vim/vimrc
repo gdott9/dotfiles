@@ -32,8 +32,9 @@ if filereadable(expand("$HOME/.vim/bundle/vundle/README.md"))
     Plugin 'tpope/vim-fugitive'
     Plugin 'scrooloose/syntastic'
 
-    Plugin 'Gundo'
-    Plugin 'The-NERD-Commenter'
+    Plugin 'sjl/gundo.vim'
+    Plugin 'scrooloose/nerdcommenter'
+
     Plugin 'VisIncr'
 endif
 " }
@@ -151,6 +152,7 @@ nnoremap <leader>d "_d
 
 " PLUGINS
 " {
+let g:gundo_prefer_python3 = 1
 " gitgutter
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
