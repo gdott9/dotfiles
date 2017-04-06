@@ -1,0 +1,175 @@
+#!/usr/bin/env ruby
+
+begin
+  require 'cocaine'
+rescue LoadError
+  puts "Cocaine gem not found, install it: 'gem install cocaine'"
+  exit
+end
+
+require 'yaml'
+
+module Release
+  class Version
+    attr_accessor :major, :minor, :patch
+
+    VERSION_REGEX = /.*([0-9]+)\.([0-9]+)\.([0-9]+).*/
+
+    def self.load
+      [Ruby, Yaml].detect(&:check?).new
+    end
+
+    def initialize
+      read
+    end
+
+    def file
+      self.class::FILE
+    end
+
+    def increment
+      if ENV.key?('VERSION')
+        self.version = ENV['VERSION']
+      elsif ENV.key?('MAJOR')
+        increment_major
+      elsif ENV.key?('MINOR')
+        increment_minor
+      else
+        increment_patch
+      end
+
+      self
+    end
+
+    def increment_major
+      self.patch = 0
+      self.minor = 0
+      self.major += 1
+    end
+
+    def increment_minor
+      self.patch = 0
+      self.minor += 1
+    end
+
+    def increment_patch
+      self.patch += 1
+    end
+
+    def next
+      dup.increment
+    end
+
+    def version
+      "#{major}.#{minor}.#{patch}"
+    end
+
+    def version=(version)
+      match = VERSION_REGEX.match version
+
+      self.major = match[1].to_i
+      self.minor = match[2].to_i
+      self.patch = match[3].to_i
+    end
+
+    def save
+      write
+      version
+    end
+
+    class Ruby < Version
+      FILE = Dir.glob(File.join('lib', '*', 'version.rb')).first
+      REGEX = /VERSION\s*=\s*['"]([0-9]+)\.([0-9]+)\.([0-9]+)['"]/
+
+      def self.check?
+        !FILE.nil?
+      end
+
+      private
+
+      def read
+        file_version = File.open(FILE, 'r') { |f| f.grep(REGEX).first }
+        self.version = file_version
+      end
+
+      def write
+        content = File.read(FILE).gsub(REGEX, "VERSION = '#{version}'")
+        File.open(FILE, 'w') { |f| f.write content }
+      end
+    end
+
+    class Yaml < Version
+      FILE = File.join('config', 'version.yml')
+
+      def self.check?
+        File.exist?(FILE)
+      end
+
+      private
+
+      def read
+        yaml = YAML.load_file(FILE)
+
+        self.major = yaml['major'].to_i
+        self.minor = yaml['minor'].to_i
+        self.patch = yaml['patch'].to_i
+      end
+
+      def write
+        File.open(FILE, 'w') do |f|
+          f.write YAML.dump('major' => major, 'minor' => minor, 'patch' => patch)
+        end
+      end
+    end
+  end
+
+  class Git
+    REMOTE = 'origin'
+    RELEASE_BRANCH = 'master'
+
+    def self.create
+      develop_branch = current_branch
+
+      Cocaine::CommandLine.new('git', 'fetch :remote').run(remote: REMOTE)
+
+      stash = Cocaine::CommandLine.new('git', 'stash create').run.chomp
+      Cocaine::CommandLine.new('git', 'reset --hard').run
+
+      Cocaine::CommandLine.new('git', 'checkout :branch').run(branch: RELEASE_BRANCH)
+      Cocaine::CommandLine.new('git', 'merge --ff-only :branch').run(
+        branch: "#{REMOTE}/#{RELEASE_BRANCH}")
+
+      Cocaine::CommandLine.new('git', 'checkout :branch').run(branch: develop_branch)
+
+      version = Version.load
+      version.increment
+
+      version.save
+
+      Cocaine::CommandLine.new('git', 'add :file').run(file: version.file)
+      Cocaine::CommandLine.new('git', 'commit -m :message').run(
+        message: "Bump version to #{version.version}")
+
+      Cocaine::CommandLine.new('git', 'checkout :branch').run(branch: RELEASE_BRANCH)
+      Cocaine::CommandLine.new('git', 'merge --no-ff -m :message :branch').run(
+        message: "Merge release #{version.version}", branch: develop_branch)
+
+      Cocaine::CommandLine.new('git', 'tag -a -m :message :tag').run(
+        message: "Release #{version.version}", tag: version.version)
+    ensure
+      Cocaine::CommandLine.new('git', 'checkout :branch').run(branch: develop_branch)
+      Cocaine::CommandLine.new('git', 'stash apply :stash').run(stash: stash) unless stash.to_s.empty?
+    end
+
+    def self.current_branch
+      branch = Cocaine::CommandLine.new('git', 'rev-parse --abbrev-ref HEAD').run.chomp
+      branch == 'HEAD' ? current_commit : branch
+    end
+
+    def self.current_commit
+      Cocaine::CommandLine.new('git', 'rev-parse HEAD').run.chomp
+    end
+  end
+end
+
+Release::Git.create

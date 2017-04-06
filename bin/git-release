@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+
+require 'date'
+
+begin
+  require 'cocaine'
+rescue LoadError
+  puts "Cocaine gem not found, install it: 'gem install cocaine'"
+  exit
+end
+
+module Release
+  class Git
+    REMOTE = 'origin'
+    RELEASE_BRANCH = 'master'
+
+    def self.create
+      develop_branch = current_branch
+
+      stash = Cocaine::CommandLine.new('git', 'stash create').run.chomp
+      Cocaine::CommandLine.new('git', 'reset --hard').run
+
+      Cocaine::CommandLine.new('git', 'checkout :branch').run(branch: RELEASE_BRANCH)
+      Cocaine::CommandLine.new('git', 'merge --ff-only :branch').run(branch: develop_branch)
+
+      Cocaine::CommandLine.new('git', 'tag -a -m :message :tag').run(
+        message: "Released by #{user}@#{hostname}", tag: "release-#{DateTime.now.strftime('%Y%m%dT%H%M%S')}")
+
+      Cocaine::CommandLine.new('git', 'push --tags :remote :branch').run(
+        remote: REMOTE, branch: "#{RELEASE_BRANCH}:#{RELEASE_BRANCH}")
+    ensure
+      Cocaine::CommandLine.new('git', 'checkout :branch').run(branch: develop_branch)
+      Cocaine::CommandLine.new('git', 'stash apply :stash').run(stash: stash) unless stash.to_s.empty?
+    end
+
+    def self.current_branch
+      branch = Cocaine::CommandLine.new('git', 'rev-parse --abbrev-ref HEAD').run.chomp
+      branch == 'HEAD' ? current_commit : branch
+    end
+
+    def self.current_commit
+      Cocaine::CommandLine.new('git', 'rev-parse HEAD').run.chomp
+    end
+
+    def self.user
+      Cocaine::CommandLine.new('id', '-un').run.chomp
+    end
+
+    def self.hostname
+      Cocaine::CommandLine.new('hostname').run.chomp
+    end
+  end
+end
+
+Release::Git.create

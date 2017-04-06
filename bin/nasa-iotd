@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require 'tempfile'
+require 'rss'
+require 'uri'
+require 'net/http'
+
+IMAGE_DIR = File.expand_path '~/pictures/nasa-iotd'
+FEED_URL = 'http://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss'
+
+CURRENT_FILE = File.join(IMAGE_DIR, 'current.jpg')
+PREVIOUS_FILE = File.join(IMAGE_DIR, 'previous.jpg')
+WALLPAPER_FILE = File.join(IMAGE_DIR, 'wallpaper.jpg')
+
+def download url, file
+  File.open(file, 'wb') { |f| f.write Net::HTTP.get(URI(url)) }
+  `convert #{file} -resize 1920x1080 -gravity center -background black -extent 1920x1080 #{file}`
+end
+
+FileUtils.mkdir_p(IMAGE_DIR) unless File.directory?(IMAGE_DIR)
+
+feed = RSS::Parser.parse FEED_URL, false
+today = feed.items.first.enclosure.url.sub('http:', 'https:')
+
+new = Tempfile.new('nasa-iotd').path
+
+download today, new
+
+unless File.exists?(CURRENT_FILE) && FileUtils.cmp(new, CURRENT_FILE)
+  FileUtils.mv CURRENT_FILE, PREVIOUS_FILE if File.exist?(CURRENT_FILE)
+  FileUtils.mv new, CURRENT_FILE
+end
+
+download feed.items[1].enclosure.url.sub('http:', 'https:'), PREVIOUS_FILE unless File.exist?(PREVIOUS_FILE)
+
+`convert #{CURRENT_FILE} #{PREVIOUS_FILE} +append #{WALLPAPER_FILE}`
+`feh --bg-tile #{WALLPAPER_FILE}`
