@@ -1,0 +1,26 @@
+command=/usr/share/i3blocks/$BLOCK_NAME
+separator_block_width=10
+markup=none
+
+[bandwidth]
+interval=5
+
+[memory]
+label=MEM
+separator=false
+interval=30
+
+[disk]
+label=/
+instance=/
+separator=false
+interval=30
+
+[disk]
+label=/home
+interval=30
+
+[cpu_usage]
+label=CPU
+interval=10
+min_width=CPU: 100.00%

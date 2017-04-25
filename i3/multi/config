@@ -1,0 +1,227 @@
+set $mod Mod4
+set $leftoutput DVI-I-1
+set $rightoutput VGA-1
+
+font pango:monospace 8
+
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec urxvtc
+
+bindsym $mod+b exec i3lock
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+i exec dmenu_run
+
+# change focus
+bindsym $mod+t focus left
+bindsym $mod+s focus down
+bindsym $mod+r focus up
+bindsym $mod+n focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+t move left
+bindsym $mod+Shift+s move down
+bindsym $mod+Shift+r move up
+bindsym $mod+Shift+n move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Control+t focus output left
+bindsym $mod+Control+n focus output right
+
+bindsym $mod+Control+Left move workspace to output left
+bindsym $mod+Control+Right move workspace to output right
+
+# split in horizontal orientation
+bindsym $mod+c split h
+
+# split in vertical orientation
+bindsym $mod+period split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+u layout stacking
+bindsym $mod+eacute layout tabbed
+bindsym $mod+p layout toggle split
+
+bindsym $mod+z sticky toggle
+
+# toggle tiling / floating
+bindsym $mod+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+Shift+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+quotedbl workspace 1
+bindsym $mod+guillemotleft workspace 2
+bindsym $mod+guillemotright workspace 3
+bindsym $mod+parenleft workspace 4
+bindsym $mod+parenright workspace 5
+bindsym $mod+at workspace 6
+bindsym $mod+plus workspace 7
+bindsym $mod+minus workspace 8
+bindsym $mod+slash workspace 9
+bindsym $mod+asterisk workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+quotedbl move container to workspace 1
+bindsym $mod+Shift+guillemotleft move container to workspace 2
+bindsym $mod+Shift+guillemotright move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+at move container to workspace 6
+bindsym $mod+Shift+plus move container to workspace 7
+bindsym $mod+Shift+minus move container to workspace 8
+bindsym $mod+Shift+slash move container to workspace 9
+bindsym $mod+Shift+asterisk move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+x reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+o restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym t resize shrink width 10 px or 10 ppt
+        bindsym s resize grow height 10 px or 10 ppt
+        bindsym r resize shrink height 10 px or 10 ppt
+        bindsym n resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+o mode "resize"
+
+mode "move" {
+        set $normal 50
+        set $withshift 5
+        set $withcontrol 100
+        set $withmod 200
+
+        bindsym t move left $normal px
+        bindsym s move down $normal px
+        bindsym r move up $normal px
+        bindsym n move right $normal px
+
+        bindsym Left move left $normal px
+        bindsym Down move down $normal px
+        bindsym Up move up $normal px
+        bindsym Right move right $normal px
+
+        bindsym Shift+t move left $withshift px
+        bindsym Shift+s move down $withshift px
+        bindsym Shift+r move up $withshift px
+        bindsym Shift+n move right $withshift px
+
+        bindsym Shift+Left move left $withshift px
+        bindsym Shift+Down move down $withshift px
+        bindsym Shift+Up move up $withshift px
+        bindsym Shift+Right move right $withshift px
+
+        bindsym Control+t move left $withcontrol px
+        bindsym Control+s move down $withcontrol px
+        bindsym Control+r move up $withcontrol px
+        bindsym Control+n move right $withcontrol px
+
+        bindsym Control+Left move left $withcontrol px
+        bindsym Control+Down move down $withcontrol px
+        bindsym Control+Up move up $withcontrol px
+        bindsym Control+Right move right $withcontrol px
+
+        bindsym $mod+t move left $withmod px
+        bindsym $mod+s move down $withmod px
+        bindsym $mod+r move up $withmod px
+        bindsym $mod+n move right $withmod px
+
+        bindsym $mod+Left move left $withmod px
+        bindsym $mod+Down move down $withmod px
+        bindsym $mod+Up move up $withmod px
+        bindsym $mod+Right move right $withmod px
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+m mode "move"
+
+bar {
+        output DVI-I-1
+        status_command i3blocks -c ~/.config/i3blocks/left-config
+}
+
+bar {
+        output VGA-1
+        status_command i3blocks -c ~/.config/i3blocks/right-config
+}
+
+workspace_auto_back_and_forth yes
+
+workspace 1 output $leftoutput
+workspace 2 output $leftoutput
+workspace 3 output $leftoutput
+workspace 4 output $leftoutput
+workspace 5 output $leftoutput
+
+workspace 6 output $rightoutput
+workspace 7 output $rightoutput
+workspace 8 output $rightoutput
+workspace 9 output $rightoutput
+workspace 10 output $rightoutput
+
+assign [class="^Firefox" tiling] workspace 2
+assign [class="^Thunderbird" tiling] workspace 10
+
+bindsym XF86Calculator exec urxvtc -name float
+for_window [class="^URxvt$" instance="^float$"] floating toggle
+for_window [class="^mpv$"] floating toggle
+
+bindsym XF86HomePage workspace 2
+bindsym XF86Mail workspace 10
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+
+# Media player controls
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym XF86AudioPrev exec --no-startup-id mpc previous
+
+new_window pixel 1
+
+mouse_warping none

@@ -1,0 +1,17 @@
+command=/usr/share/i3blocks/$BLOCK_NAME
+separator_block_width=10
+markup=none
+
+[mpc]
+command=mpc | head -2 | tr '\n' ' ' | sed 's/#[^ ]*//' | tr -s ' '
+interval=5
+
+[volume]
+label=VOL
+instance=Master
+interval=once
+signal=10
+
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=5
