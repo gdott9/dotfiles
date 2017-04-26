@@ -202,8 +202,8 @@ workspace 8 output $rightoutput
 workspace 9 output $rightoutput
 workspace 10 output $rightoutput
 
-assign [class="^Firefox" tiling] workspace 2
-assign [class="^Thunderbird" tiling] workspace 10
+assign [class="^Firefox" instance="^Navigator$"] workspace 2
+assign [class="^Thunderbird" instance="^Mail$"] workspace 10
 
 bindsym XF86Calculator exec urxvtc -name float
 for_window [class="^URxvt$" instance="^float$"] floating toggle
