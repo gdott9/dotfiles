@@ -134,7 +134,6 @@ export LESS_TERMCAP_us=$'\E[01;32m' # begin underline
 export LESS_TERMCAP_ue=$'\E[0m' # end underline
 
 precmd() {
-    [ -t 0 ] && print -Pn "\33]2;%(!.[ROOT] .)%m:%~ | ${COLUMNS}x${LINES} | %y\007"
     vcs_info
 }
 preexec() { }
