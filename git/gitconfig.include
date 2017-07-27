@@ -20,7 +20,8 @@
 [diff]
 	tool = vimdiff
 [merge]
-	tool = meld
+	tool = vimdiff
+	conflictstyle = diff3
 [mergetool]
 	keepBackup = false
 [credential]
