@@ -15,7 +15,7 @@ bindsym $mod+b exec i3lock
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+i exec dmenu_run
+bindsym $mod+i exec rofi -show drun
 
 # change focus
 bindsym $mod+t focus left
@@ -179,12 +179,12 @@ mode "move" {
 bindsym $mod+m mode "move"
 
 bar {
-        output DVI-I-1
+        output $leftoutput
         status_command i3blocks -c ~/.config/i3blocks/left-config
 }
 
 bar {
-        output VGA-1
+        output $rightoutput
         status_command i3blocks -c ~/.config/i3blocks/right-config
 }
 
