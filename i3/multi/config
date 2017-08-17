@@ -15,7 +15,7 @@ bindsym $mod+b exec i3lock
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+i exec rofi -show drun
+bindsym $mod+i exec rofi -show run
 
 # change focus
 bindsym $mod+t focus left
@@ -203,11 +203,15 @@ workspace 9 output $rightoutput
 workspace 10 output $rightoutput
 
 assign [class="^Firefox" instance="^Navigator$"] workspace 2
-assign [class="^Thunderbird" instance="^Mail$"] workspace 10
+assign [class="^Thunderbird"] workspace 10
+
+assign [class="^URxvt$" instance="^lesportecles-code$"] workspace 3
+assign [class="^URxvt$" instance="^lesportecles-rails$"] workspace 8
 
 bindsym XF86Calculator exec urxvtc -name float
 for_window [class="^URxvt$" instance="^float$"] floating toggle
 for_window [class="^mpv$"] floating toggle
+for_window [class="^Pinentry$"] floating toggle
 
 bindsym XF86HomePage workspace 2
 bindsym XF86Mail workspace 10
