@@ -1,4 +1,4 @@
-rofi.modi: drun,run,ssh,window
+rofi.modi: run,ssh,window
 
 rofi.font: Monospace 8
 rofi.width: 100
