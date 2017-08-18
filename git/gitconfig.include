@@ -32,4 +32,5 @@
 	enabled = true
 [rebase]
 	autosquash = true
+	autostassh = true
 # vim: set filetype=gitconfig:
