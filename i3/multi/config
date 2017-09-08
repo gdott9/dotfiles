@@ -209,9 +209,10 @@ assign [class="^URxvt$" instance="^lesportecles-code$"] workspace 3
 assign [class="^URxvt$" instance="^lesportecles-rails$"] workspace 8
 
 bindsym XF86Calculator exec urxvtc -name float
-for_window [class="^URxvt$" instance="^float$"] floating toggle
-for_window [class="^mpv$"] floating toggle
-for_window [class="^Pinentry$"] floating toggle
+for_window [class="^URxvt$" instance="^float$"] floating enable
+for_window [class="^mpv$"] floating enable
+for_window [class="^Pinentry$"] floating enable
+for_window [class="^TeamViewer$"] floating enable
 
 bindsym XF86HomePage workspace 2
 bindsym XF86Mail workspace 10
@@ -226,6 +227,8 @@ bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86AudioNext exec --no-startup-id mpc next
 bindsym XF86AudioPrev exec --no-startup-id mpc previous
 
-new_window pixel 1
+bindsym Print exec --no-startup-id scrot -u  -e 'mv $f ~/pictures/screenshots' '%F-%H%M%S_$wx$h_scrot.png'
+
+new_window pixel 2
 
 mouse_warping none
